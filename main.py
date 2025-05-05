@@ -47,10 +47,17 @@ def main():
         #update objects
         updatable.update(dt)
 
-        for item in asteroids:
-            if player.collision_detection(item):
+        for asteroid in asteroids:
+            if player.collision_detection(asteroid):
                 print("Game over!")
                 sys.exit()
+
+            for shot in shots:
+                if shot.collision_detection(asteroid):
+                    shot.kill()
+                    asteroid.split()
+
+        
 
         #draw things
         for item in drawable:
